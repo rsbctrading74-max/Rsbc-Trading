@@ -1,0 +1,6 @@
+{
+  "name": "RSBC Trading – Cleaning, Catering & Maintenance Services",
+  "description": "CIPC-registered South African multi-service provider delivering integrated commercial and residential cleaning, catering, and facility maintenance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
