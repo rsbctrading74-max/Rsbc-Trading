@@ -5,7 +5,7 @@ export const COMPANY_DETAILS = {
   shortName: 'RSBC Trading',
   tagline: 'One Team. Every Service.',
   subheadline: 'South Africa’s premier all-rounder partner for commercial & residential cleaning, corporate catering, and facility maintenance.',
-  cipcNumber: '2024/718932/07',
+  cipcNumber: '2025/578884/07',
   email: 'rsbctrading74@gmail.com',
   primaryPhone: '+27 62 101 3195',
   primaryPhoneDisplay: '062 101 3195',
@@ -337,7 +337,7 @@ export const WHY_US_PILLARS = [
   },
   {
     title: 'CIPC Registered & Fully Compliant',
-    description: 'Officially registered South African private company (Reg. 2024/718932/07) carrying comprehensive public liability insurance and COIDA compliance.',
+    description: 'Officially registered South African private company (Reg. 2025/578884/07) carrying comprehensive public liability insurance and COIDA compliance.',
     highlight: '100% Legal & Audited',
   },
   {
