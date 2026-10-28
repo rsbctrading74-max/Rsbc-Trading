@@ -1,4 +1,5 @@
 import { TeamMember, ServiceDetail, GalleryItem, PartnerInfo } from '../types';
+import { IMAGES } from '../assets/images';
 
 export const COMPANY_DETAILS = {
   name: 'RSBC Trading (Pty) Ltd',
@@ -15,6 +16,8 @@ export const COMPANY_DETAILS = {
   operatingHours: 'Monday – Friday: 07:30 – 17:30 | Saturday: 08:00 – 14:00 | 24/7 SLA Emergency Support',
   googlePhotosAlbumUrl: 'https://photos.app.goo.gl/BB2hGhzwF95g9SM96',
   maintenancePortalUrl: 'https://maintain-pro-3f6d5ec8.base44.app',
+  logo: IMAGES.rsbcLogoCrest,
+  heroBanner: IMAGES.heroBanner,
 };
 
 // Strategic Partners
@@ -24,14 +27,14 @@ export const STRATEGIC_PARTNERS: PartnerInfo[] = [
     focus: 'Technology & Digital Infrastructure',
     description: 'Empowers RSBC with cloud dispatch systems, digital job-ticketing, quality audits, and digital innovation.',
     badge: 'Tech Partner',
-    logo: '/src/assets/images/future_coding_corp_logo_1793183015993.jpg',
+    logo: IMAGES.futureCodingLogo,
   },
   {
     name: 'Young Investments Holding',
     focus: 'Capital & Business Development',
     description: 'Provides strategic capital advisory, fleet financing, and enterprise expansion backing across southern Africa.',
     badge: 'Investment Partner',
-    logo: '/src/assets/images/young_investments_logo_1793183016423.jpg',
+    logo: IMAGES.youngInvestmentsLogo,
     website: 'https://www.younginvest.co.za',
   },
 ];
@@ -110,7 +113,7 @@ export const CORE_SERVICES: ServiceDetail[] = [
     tagline: 'Spotless Commercial Facilities & Pristine Residential Spaces',
     description: 'From high-traffic corporate headquarters and retail stores to premium estates and post-construction handovers, our vetted teams use industrial-grade equipment and eco-certified chemicals.',
     iconName: 'Sparkles',
-    image: '/src/assets/images/cleaning_service_showcase_1791449083835.jpg',
+    image: IMAGES.cleaningShowcase,
     features: [
       'Daily & Scheduled Commercial Office Cleaning',
       'Pre-Occupation & Post-Construction Deep Cleans',
@@ -158,7 +161,7 @@ export const CORE_SERVICES: ServiceDetail[] = [
     tagline: 'Memorable Culinary Experiences for Corporate Events & Private Gatherings',
     description: 'We deliver unforgettable corporate luncheons, conference banquets, cocktail canapés, and private celebrations. Exceptional South African hospitality crafted with fresh, local ingredients.',
     iconName: 'Utensils',
-    image: '/src/assets/images/catering_service_showcase_1791449092868.jpg',
+    image: IMAGES.cateringShowcase,
     features: [
       'Executive Boardroom Platters & Cold Cut Spreads',
       'Full Hot Buffet Stations & Traditional Carvery',
@@ -206,7 +209,7 @@ export const CORE_SERVICES: ServiceDetail[] = [
     tagline: 'Proactive Facility Upkeep & Rapid Emergency Repairs',
     description: 'Keep your properties functioning at peak condition. Our qualified handymen, electricians, and plumbers handle everything from routine light fixture overhauls to emergency pipe bursts.',
     iconName: 'Wrench',
-    image: '/src/assets/images/maintenance_service_showcase_1791449102395.jpg',
+    image: IMAGES.maintenanceShowcase,
     features: [
       'Electrical Diagnostics, DB Board Repairs & LED Conversions',
       'Plumbing Maintenance, Leak Detection & Geyser Servicing',
@@ -256,7 +259,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: 'gal-1',
     title: 'Commercial Office Atrium Floor Restored',
     category: 'cleaning',
-    image: '/src/assets/images/cleaning_service_showcase_1791449083835.jpg',
+    image: IMAGES.cleaningShowcase,
     description: 'Marble deep scrubbing, high-gloss crystallization buffing, and glass rail sanitization for financial firm lobby in Sandton.',
     clientType: 'B2B Corporate',
     dateCompleted: 'October 2026',
@@ -265,7 +268,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: 'gal-2',
     title: 'Corporate Year-End Banquet & Carvery',
     category: 'catering',
-    image: '/src/assets/images/catering_service_showcase_1791449092868.jpg',
+    image: IMAGES.cateringShowcase,
     description: 'Hot buffet stations, succulent roast carvery, fresh Mediterranean salads, and canapés for 180 delegates.',
     clientType: 'B2B Corporate',
     dateCompleted: 'September 2026',
@@ -274,7 +277,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: 'gal-3',
     title: 'Commercial Distribution DB Board & Lighting Upgrade',
     category: 'maintenance',
-    image: '/src/assets/images/maintenance_service_showcase_1791449102395.jpg',
+    image: IMAGES.maintenanceShowcase,
     description: 'Electrical overhaul, circuit breaker load balancing, and high-bay LED efficiency replacement in Midrand.',
     clientType: 'Commercial Facility',
     dateCompleted: 'September 2026',
@@ -283,7 +286,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: 'gal-4',
     title: 'Fleet Deployment & Multi-Service Team',
     category: 'cleaning',
-    image: '/src/assets/images/rsbc_hero_banner_1791449074465.jpg',
+    image: IMAGES.heroBanner,
     description: 'Integrated facilities crew mobilization: cleaning technicians, catering staff, and on-call maintenance units.',
     clientType: 'B2B Corporate',
     dateCompleted: 'August 2026',
@@ -292,7 +295,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: 'gal-5',
     title: 'Executive Boardroom Canapé & Coffee Service',
     category: 'catering',
-    image: '/src/assets/images/catering_service_showcase_1791449092868.jpg',
+    image: IMAGES.cateringShowcase,
     description: 'Artisanal brioche sliders, smoked salmon blinis, and roast beef skewers for executive quarterly review.',
     clientType: 'B2B Corporate',
     dateCompleted: 'August 2026',
@@ -301,7 +304,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: 'gal-6',
     title: 'Facility Plumbing Overhaul & Pipe Relining',
     category: 'maintenance',
-    image: '/src/assets/images/maintenance_service_showcase_1791449102395.jpg',
+    image: IMAGES.maintenanceShowcase,
     description: 'Rapid commercial water leak repair, pipe resealing, and bathroom sanitary hardware replacements.',
     clientType: 'Commercial Facility',
     dateCompleted: 'July 2026',

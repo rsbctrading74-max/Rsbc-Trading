@@ -72,7 +72,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestQuote }) =>
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-xl p-0.5 bg-slate-900 border border-[#C9A84C]/50 shadow-md flex items-center justify-center shrink-0">
               <img
-                src="/src/assets/images/rsbc_logo_crest_1791449111579.jpg"
+                src={COMPANY_DETAILS.logo}
                 alt="RSBC Trading Official Insignia"
                 className="w-full h-full object-cover rounded-lg"
                 referrerPolicy="no-referrer"

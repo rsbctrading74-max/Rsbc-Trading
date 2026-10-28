@@ -53,7 +53,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         <div className="mt-12 bg-slate-900/60 border border-slate-800 rounded-3xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-xl">
           <div className="lg:col-span-4 flex flex-col items-center justify-center text-center p-6 bg-slate-950/80 rounded-2xl border border-slate-800">
             <img
-              src="/src/assets/images/rsbc_logo_crest_1791449111579.jpg"
+              src={COMPANY_DETAILS.logo}
               alt="RSBC Trading Official Insignia"
               className="w-36 h-36 rounded-2xl object-cover border-2 border-[#C9A84C]/50 shadow-xl mb-4"
               referrerPolicy="no-referrer"

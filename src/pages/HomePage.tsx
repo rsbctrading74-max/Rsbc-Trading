@@ -55,7 +55,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         {/* Background Image with Heavy Contrast Scrim */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/rsbc_hero_banner_1791449074465.jpg"
+            src={COMPANY_DETAILS.heroBanner}
             alt="RSBC Trading Multi-Service Fleet and Team"
             className="w-full h-full object-cover object-center filter brightness-50 contrast-110"
             referrerPolicy="no-referrer"
