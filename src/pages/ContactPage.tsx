@@ -416,13 +416,13 @@ export const ContactPage: React.FC = () => {
             {/* Google Maps Interactive Embed */}
             <div className="mt-4 pt-4 border-t border-slate-800">
               <div className="flex items-center justify-between text-xs mb-2">
-                <span className="font-semibold text-white">Our Sandton, Gauteng Hub</span>
+                <span className="font-semibold text-white">Our Mid Ennerdale Hub</span>
                 <span className="text-[11px] text-[#C9A84C]">Google Maps View</span>
               </div>
               <div className="w-full h-56 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 relative">
                 <iframe
                   title="RSBC Trading Headquarters Location Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114620.19890483863!2d27.978056!3d-26.104444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95733f382a39d1%3A0x6b77241249b5585!2sSandton%2C%20Johannesburg!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza"
+                  src="https://maps.google.com/maps?q=113+7th+Ave,+Mid+Ennerdale,+Johannesburg,+South+Africa&t=&z=14&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }}

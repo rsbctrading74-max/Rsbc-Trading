@@ -11,7 +11,7 @@ export const COMPANY_DETAILS = {
   primaryPhone: '+27 62 101 3195',
   primaryPhoneDisplay: '062 101 3195',
   whatsappNumber: '27621013195',
-  address: '124 Rivonia Road, Sandton, Johannesburg, 2196, South Africa',
+  address: '113 7th Ave, Mid Ennerdale, Johannesburg, South Africa',
   serviceAreas: 'Greater Johannesburg, Sandton, Midrand, Pretoria, Centurion & East Rand',
   operatingHours: 'Monday – Friday: 07:30 – 17:30 | Saturday: 08:00 – 14:00 | 24/7 SLA Emergency Support',
   googlePhotosAlbumUrl: 'https://photos.app.goo.gl/BB2hGhzwF95g9SM96',
