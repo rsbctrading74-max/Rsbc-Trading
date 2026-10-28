@@ -28,25 +28,39 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onRequestQuote }) =>
           
           <div className="flex flex-wrap items-center gap-6">
             <span className="text-xs uppercase tracking-wider text-slate-400">Strategic Partners:</span>
-            {STRATEGIC_PARTNERS.map((partner) => (
-              <div
-                key={partner.name}
-                className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/80 hover:border-[#C9A84C]/50 transition-colors"
-              >
-                {partner.logo && (
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className="w-6 h-6 rounded object-cover border border-slate-600"
-                    referrerPolicy="no-referrer"
-                  />
-                )}
-                <span className="text-xs font-semibold text-slate-200">{partner.name}</span>
-                <span className="text-[10px] text-[#C9A84C] bg-slate-900/90 px-1.5 py-0.5 rounded font-mono">
-                  {partner.badge}
-                </span>
-              </div>
-            ))}
+            {STRATEGIC_PARTNERS.map((partner) => {
+              const Tag = partner.website ? 'a' : 'div';
+              const linkProps = partner.website ? {
+                href: partner.website,
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                title: `Visit ${partner.name}: ${partner.website}`
+              } : {};
+
+              return (
+                <Tag
+                  key={partner.name}
+                  {...linkProps}
+                  className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/80 hover:border-[#C9A84C]/50 transition-colors group"
+                >
+                  {partner.logo && (
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      className="w-6 h-6 rounded object-cover border border-slate-600 group-hover:scale-105 transition-transform"
+                      referrerPolicy="no-referrer"
+                    />
+                  )}
+                  <span className="text-xs font-semibold text-slate-200 group-hover:text-amber-400 transition-colors">
+                    {partner.name}
+                  </span>
+                  <span className="text-[10px] text-[#C9A84C] bg-slate-900/90 px-1.5 py-0.5 rounded font-mono flex items-center gap-1">
+                    {partner.badge}
+                    {partner.website && <ExternalLink className="w-2.5 h-2.5 text-slate-400" />}
+                  </span>
+                </Tag>
+              );
+            })}
           </div>
         </div>
       </div>

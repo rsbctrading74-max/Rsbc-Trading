@@ -1,6 +1,6 @@
 import React from 'react';
 import { COMPANY_DETAILS, STRATEGIC_PARTNERS } from '../data/companyData';
-import { ShieldCheck, Cpu, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Cpu, TrendingUp, CheckCircle2, ExternalLink } from 'lucide-react';
 
 export const TrustBar: React.FC = () => {
   return (
@@ -44,9 +44,15 @@ export const TrustBar: React.FC = () => {
             </div>
           </div>
 
-          {/* Strategic Investment Partner */}
-          <div className="flex items-center gap-3.5 bg-slate-950/60 border border-slate-800/90 rounded-xl p-3.5 hover:border-amber-500/40 transition-colors">
-            <div className="w-12 h-12 rounded-lg overflow-hidden border border-amber-500/30 bg-slate-900 shrink-0 shadow-sm">
+          {/* Strategic Investment Partner with Link to www.younginvest.co.za */}
+          <a
+            href={STRATEGIC_PARTNERS[1].website || "https://www.younginvest.co.za"}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Visit Young Investments Holding: www.younginvest.co.za"
+            className="flex items-center gap-3.5 bg-slate-950/60 border border-slate-800/90 rounded-xl p-3.5 hover:border-amber-500/60 hover:bg-slate-950 transition-all group cursor-pointer shadow-sm"
+          >
+            <div className="w-12 h-12 rounded-lg overflow-hidden border border-amber-500/30 bg-slate-900 shrink-0 shadow-sm group-hover:scale-105 group-hover:border-amber-400 transition-all">
               <img
                 src={STRATEGIC_PARTNERS[1].logo}
                 alt={STRATEGIC_PARTNERS[1].name}
@@ -54,16 +60,24 @@ export const TrustBar: React.FC = () => {
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div>
+            <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-white">{STRATEGIC_PARTNERS[1].name}</span>
-                <span className="text-[10px] text-amber-400 bg-amber-950/80 border border-amber-800/50 px-1.5 rounded font-medium">Capital Partner</span>
+                <span className="text-xs font-bold text-white group-hover:text-amber-400 transition-colors truncate">
+                  {STRATEGIC_PARTNERS[1].name}
+                </span>
+                <span className="text-[10px] text-amber-400 bg-amber-950/80 border border-amber-800/50 px-1.5 rounded font-medium shrink-0">
+                  Capital Partner
+                </span>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-400 mt-0.5 group-hover:text-slate-300 transition-colors">
                 Capital backing &amp; business development
               </p>
+              <span className="inline-flex items-center gap-1 text-[11px] text-amber-400/90 hover:text-amber-300 font-mono mt-0.5">
+                <span>www.younginvest.co.za</span>
+                <ExternalLink className="w-3 h-3" />
+              </span>
             </div>
-          </div>
+          </a>
         </div>
 
         {/* Quick Micro-Certifications Row */}

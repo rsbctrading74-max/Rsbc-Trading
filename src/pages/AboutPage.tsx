@@ -16,7 +16,8 @@ import {
   Sparkles,
   Building2,
   Clock,
-  Briefcase
+  Briefcase,
+  ExternalLink
 } from 'lucide-react';
 import { PageType } from '../types';
 
@@ -178,7 +179,19 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
                 <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
                   <span>Collaborative Integration</span>
-                  <span className="text-emerald-400 font-medium">Active Synergy</span>
+                  {partner.website ? (
+                    <a
+                      href={partner.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-semibold text-amber-400 hover:text-amber-300 transition-colors"
+                    >
+                      <span>Visit {partner.website.replace('https://', '')}</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  ) : (
+                    <span className="text-emerald-400 font-medium">Active Synergy</span>
+                  )}
                 </div>
               </div>
             ))}

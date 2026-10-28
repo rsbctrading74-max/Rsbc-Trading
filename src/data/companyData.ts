@@ -32,6 +32,7 @@ export const STRATEGIC_PARTNERS: PartnerInfo[] = [
     description: 'Provides strategic capital advisory, fleet financing, and enterprise expansion backing across southern Africa.',
     badge: 'Investment Partner',
     logo: '/src/assets/images/young_investments_logo_1793183016423.jpg',
+    website: 'https://www.younginvest.co.za',
   },
 ];
 
