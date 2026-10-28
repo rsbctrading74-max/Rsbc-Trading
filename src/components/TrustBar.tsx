@@ -24,33 +24,43 @@ export const TrustBar: React.FC = () => {
           </div>
 
           {/* Strategic Tech Partner */}
-          <div className="flex items-center gap-3.5 bg-slate-950/60 border border-slate-800/90 rounded-xl p-3.5">
-            <div className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
-              <Cpu className="w-5 h-5" />
+          <div className="flex items-center gap-3.5 bg-slate-950/60 border border-slate-800/90 rounded-xl p-3.5 hover:border-cyan-500/40 transition-colors">
+            <div className="w-12 h-12 rounded-lg overflow-hidden border border-cyan-500/30 bg-slate-900 shrink-0 shadow-sm">
+              <img
+                src={STRATEGIC_PARTNERS[0].logo}
+                alt={STRATEGIC_PARTNERS[0].name}
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold text-white">{STRATEGIC_PARTNERS[0].name}</span>
-                <span className="text-[10px] text-blue-400 bg-blue-950/70 border border-blue-800/50 px-1.5 rounded">Tech Partner</span>
+                <span className="text-[10px] text-cyan-400 bg-cyan-950/80 border border-cyan-800/50 px-1.5 rounded font-medium">Tech Partner</span>
               </div>
               <p className="text-xs text-slate-400 mt-0.5">
-                Smart dispatch &amp; digital SLA operations
+                Digital job-dispatch &amp; portal systems
               </p>
             </div>
           </div>
 
           {/* Strategic Investment Partner */}
-          <div className="flex items-center gap-3.5 bg-slate-950/60 border border-slate-800/90 rounded-xl p-3.5">
-            <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
-              <TrendingUp className="w-5 h-5" />
+          <div className="flex items-center gap-3.5 bg-slate-950/60 border border-slate-800/90 rounded-xl p-3.5 hover:border-amber-500/40 transition-colors">
+            <div className="w-12 h-12 rounded-lg overflow-hidden border border-amber-500/30 bg-slate-900 shrink-0 shadow-sm">
+              <img
+                src={STRATEGIC_PARTNERS[1].logo}
+                alt={STRATEGIC_PARTNERS[1].name}
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold text-white">{STRATEGIC_PARTNERS[1].name}</span>
-                <span className="text-[10px] text-amber-400 bg-amber-950/70 border border-amber-800/50 px-1.5 rounded">Capital Partner</span>
+                <span className="text-[10px] text-amber-400 bg-amber-950/80 border border-amber-800/50 px-1.5 rounded font-medium">Capital Partner</span>
               </div>
               <p className="text-xs text-slate-400 mt-0.5">
-                Corporate growth &amp; enterprise backing
+                Capital backing &amp; business development
               </p>
             </div>
           </div>

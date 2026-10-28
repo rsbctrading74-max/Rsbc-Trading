@@ -12,7 +12,9 @@ import {
   Clock, 
   Phone, 
   MessageSquare,
-  Check
+  Check,
+  ExternalLink,
+  Sparkles
 } from 'lucide-react';
 import { PageType } from '../types';
 
@@ -67,11 +69,21 @@ export const MaintenancePage: React.FC<MaintenancePageProps> = ({
               )}
 
               <div className="pt-2 flex flex-wrap gap-4">
+                <a
+                  href={COMPANY_DETAILS.maintenancePortalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-300 hover:to-cyan-400 text-slate-950 font-extrabold text-xs rounded-xl shadow-lg transition-transform hover:-translate-y-0.5 flex items-center gap-2"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>Subscribe to Maintenance Portal</span>
+                </a>
+
                 <button
                   onClick={() => onRequestQuote('Maintenance')}
-                  className="px-7 py-3.5 bg-gradient-to-r from-[#D4AF37] to-[#C9A84C] hover:from-[#E5C158] hover:to-[#D8B75B] text-slate-950 font-bold text-xs rounded-xl shadow-lg transition-transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
+                  className="px-6 py-3.5 bg-gradient-to-r from-[#D4AF37] to-[#C9A84C] hover:from-[#E5C158] hover:to-[#D8B75B] text-slate-950 font-bold text-xs rounded-xl shadow-lg transition-transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
                 >
-                  <span>Request Maintenance Callout / SLA</span>
+                  <span>Request Callout / SLA</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
@@ -82,7 +94,7 @@ export const MaintenancePage: React.FC<MaintenancePageProps> = ({
                   className="px-5 py-3.5 bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs rounded-xl transition-colors flex items-center gap-2"
                 >
                   <AlertTriangle className="w-4 h-4" />
-                  <span>Emergency Fault Desk</span>
+                  <span>Emergency Desk</span>
                 </a>
               </div>
             </div>
@@ -249,6 +261,57 @@ export const MaintenancePage: React.FC<MaintenancePageProps> = ({
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Maintain Pro Online Subscription Portal Callout */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-r from-slate-950 via-cyan-950/30 to-slate-950 border border-cyan-500/40 rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            <div className="lg:col-span-8 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-400 font-semibold">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Automated Maintenance Management Platform</span>
+              </div>
+              <h3 className="text-2xl sm:text-4xl font-extrabold text-white font-display">
+                Subscribe to Maintain Pro
+              </h3>
+              <p className="text-xs sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+                Ready for streamlined property maintenance? Subscribe to our dedicated cloud application to log work orders, receive instant technician updates, schedule routine preventative visits, and manage month-to-month facility upkeep.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 text-xs text-slate-300 pt-2">
+                <span className="flex items-center gap-1.5 text-cyan-300">
+                  <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                  Instant Ticket Dispatch
+                </span>
+                <span className="flex items-center gap-1.5 text-cyan-300">
+                  <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                  Recurring Subscription Billing
+                </span>
+                <span className="flex items-center gap-1.5 text-cyan-300">
+                  <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                  Live Work-Order Status
+                </span>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 flex flex-col items-start lg:items-end justify-center gap-3">
+              <a
+                href={COMPANY_DETAILS.maintenancePortalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-300 hover:to-cyan-400 text-slate-950 font-extrabold text-sm rounded-xl shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2.5"
+              >
+                <span>Subscribe on Maintain Pro</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+              <span className="text-[11px] text-slate-400 font-mono">
+                {COMPANY_DETAILS.maintenancePortalUrl}
+              </span>
+            </div>
+          </div>
         </div>
       </section>
     </div>

@@ -14,6 +14,7 @@ export const COMPANY_DETAILS = {
   serviceAreas: 'Greater Johannesburg, Sandton, Midrand, Pretoria, Centurion & East Rand',
   operatingHours: 'Monday – Friday: 07:30 – 17:30 | Saturday: 08:00 – 14:00 | 24/7 SLA Emergency Support',
   googlePhotosAlbumUrl: 'https://photos.app.goo.gl/BB2hGhzwF95g9SM96',
+  maintenancePortalUrl: 'https://maintain-pro-3f6d5ec8.base44.app',
 };
 
 // Strategic Partners
@@ -23,12 +24,14 @@ export const STRATEGIC_PARTNERS: PartnerInfo[] = [
     focus: 'Technology & Digital Infrastructure',
     description: 'Empowers RSBC with cloud dispatch systems, digital job-ticketing, quality audits, and digital innovation.',
     badge: 'Tech Partner',
+    logo: '/src/assets/images/future_coding_corp_logo_1793183015993.jpg',
   },
   {
     name: 'Young Investments Holding',
     focus: 'Capital & Business Development',
     description: 'Provides strategic capital advisory, fleet financing, and enterprise expansion backing across southern Africa.',
     badge: 'Investment Partner',
+    logo: '/src/assets/images/young_investments_logo_1793183016423.jpg',
   },
 ];
 

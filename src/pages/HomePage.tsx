@@ -210,23 +210,37 @@ export const HomePage: React.FC<HomePageProps> = ({
                       </div>
                     </div>
 
-                    <div className="pt-2 flex items-center gap-3">
-                      <button
-                        onClick={() => {
-                          onNavigate(service.id as PageType);
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
-                        className="flex-1 py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer text-center"
-                      >
-                        Explore Offerings
-                      </button>
+                    <div className="pt-2 flex flex-col gap-2">
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={() => {
+                            onNavigate(service.id as PageType);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }}
+                          className="flex-1 py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer text-center"
+                        >
+                          Explore Offerings
+                        </button>
 
-                      <button
-                        onClick={() => onRequestQuote(service.title.split(' ')[0] as any)}
-                        className="py-2.5 px-4 bg-[#C9A84C] hover:bg-[#D8B75B] text-slate-950 rounded-lg text-xs font-bold transition-colors cursor-pointer whitespace-nowrap"
-                      >
-                        Get Quote
-                      </button>
+                        <button
+                          onClick={() => onRequestQuote(service.title.split(' ')[0] as any)}
+                          className="py-2.5 px-4 bg-[#C9A84C] hover:bg-[#D8B75B] text-slate-950 rounded-lg text-xs font-bold transition-colors cursor-pointer whitespace-nowrap"
+                        >
+                          Get Quote
+                        </button>
+                      </div>
+
+                      {service.id === 'maintenance' && (
+                        <a
+                          href={COMPANY_DETAILS.maintenancePortalUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-2 px-3 bg-cyan-950/80 border border-cyan-500/50 hover:bg-cyan-900/80 text-cyan-300 rounded-lg text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 shadow-sm"
+                        >
+                          <span>Subscribe to Maintain Pro Portal</span>
+                          <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

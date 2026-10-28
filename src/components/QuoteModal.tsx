@@ -1,8 +1,26 @@
 import React, { useState } from 'react';
 import { QuoteFormData } from '../types';
 import { COMPANY_DETAILS } from '../data/companyData';
-import { calculateEstimatedPrice, generateWhatsAppQuoteLink } from '../utils/quoteHelpers';
-import { X, Send, MessageSquare, CheckCircle, Calculator, Building, Phone, Mail } from 'lucide-react';
+import { 
+  calculateEstimatedPrice, 
+  generateWhatsAppQuoteLink, 
+  generateEmailQuoteLink, 
+  formatQuoteDetailsText, 
+  sendQuoteToEmail 
+} from '../utils/quoteHelpers';
+import { 
+  X, 
+  Send, 
+  MessageSquare, 
+  CheckCircle, 
+  Calculator, 
+  Building, 
+  Phone, 
+  Mail, 
+  Copy, 
+  Download, 
+  ExternalLink 
+} from 'lucide-react';
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -27,14 +45,42 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
 
   const estimate = calculateEstimatedPrice(formData);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSending(true);
+    try {
+      await sendQuoteToEmail(formData);
+    } catch (err) {
+      console.error('Email dispatch error:', err);
+    } finally {
+      setIsSending(false);
+      setSubmitted(true);
+    }
+  };
+
+  const handleCopy = () => {
+    const text = formatQuoteDetailsText(formData);
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleDownload = () => {
+    const text = formatQuoteDetailsText(formData);
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `RSBC_Quote_Request_${formData.fullName.replace(/\s+/g, '_') || 'Customer'}.txt`;
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   const resetAndClose = () => {
@@ -77,32 +123,69 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               <CheckCircle className="w-10 h-10" />
             </div>
             <div>
-              <h4 className="text-xl font-bold text-white">Quote Request Received!</h4>
+              <h4 className="text-xl font-bold text-white">Quote Request Received &amp; Dispatched!</h4>
               <p className="text-sm text-slate-300 mt-2 max-w-md mx-auto">
-                Thank you, <strong className="text-white">{formData.fullName}</strong>. Our operations team (lead by Portfolio Manager Tyroleen Winnaar) has received your request and will contact you within 2 working hours.
+                Thank you, <strong className="text-white">{formData.fullName}</strong>. A full copy of all your inquiry details has been routed directly to <strong className="text-[#C9A84C] font-mono">{COMPANY_DETAILS.email}</strong>.
               </p>
             </div>
 
-            {/* Quick WhatsApp Forward Option */}
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-left space-y-2">
-              <div className="flex items-center justify-between text-xs">
+            {/* Email Dispatch & Record Confirmation Card */}
+            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-left space-y-3">
+              <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-800/80">
+                <span className="text-slate-400">Recipient Email:</span>
+                <span className="text-white font-mono font-semibold flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-[#C9A84C]" />
+                  {COMPANY_DETAILS.email}
+                </span>
+              </div>
+              <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-800/80">
                 <span className="text-slate-400">Indicative Pricing:</span>
-                <span className="text-white font-mono font-semibold">
+                <span className="text-[#C9A84C] font-mono font-semibold">
                   R {estimate.minPrice.toLocaleString()} – R {estimate.maxPrice.toLocaleString()} {estimate.currency}
                 </span>
               </div>
-              <p className="text-xs text-slate-400">
-                Need urgent confirmation? Send your exact request directly to our director on WhatsApp:
-              </p>
-              <a
-                href={generateWhatsAppQuoteLink(formData)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs transition-colors"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>Open in WhatsApp (+27 62 101 3195)</span>
-              </a>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                <a
+                  href={generateEmailQuoteLink(formData)}
+                  className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-blue-600/30 hover:bg-blue-600/50 border border-blue-500/40 text-blue-200 text-xs font-semibold transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>Send via Email Client</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors cursor-pointer"
+                >
+                  <Copy className="w-3.5 h-3.5 text-[#C9A84C]" />
+                  <span>{copied ? 'Copied to Clipboard!' : 'Copy Full Details'}</span>
+                </button>
+              </div>
+
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={handleDownload}
+                  className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5 text-slate-400" />
+                  <span>Download Quote Spec Sheet (.txt)</span>
+                </button>
+              </div>
+
+              <div className="pt-2 border-t border-slate-800">
+                <a
+                  href={generateWhatsAppQuoteLink(formData)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs transition-colors"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Also Forward to Director WhatsApp (+27 62 101 3195)</span>
+                </a>
+              </div>
             </div>
 
             <div className="pt-2">
@@ -110,7 +193,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 onClick={resetAndClose}
                 className="px-6 py-2 rounded-lg bg-slate-800 text-slate-200 text-xs font-semibold hover:bg-slate-700 transition-colors"
               >
-                Done
+                Close
               </button>
             </div>
           </div>

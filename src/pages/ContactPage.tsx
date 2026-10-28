@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { COMPANY_DETAILS, TEAM_MEMBERS } from '../data/companyData';
 import { QuoteFormData } from '../types';
-import { calculateEstimatedPrice, generateWhatsAppQuoteLink } from '../utils/quoteHelpers';
+import { 
+  calculateEstimatedPrice, 
+  generateWhatsAppQuoteLink, 
+  generateEmailQuoteLink, 
+  formatQuoteDetailsText, 
+  sendQuoteToEmail 
+} from '../utils/quoteHelpers';
 import { 
   Phone, 
   Mail, 
@@ -14,7 +20,10 @@ import {
   Building2, 
   Calculator,
   ExternalLink,
-  PhoneCall
+  PhoneCall,
+  Copy,
+  Download,
+  Sparkles
 } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
@@ -30,11 +39,39 @@ export const ContactPage: React.FC = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [copied, setCopied] = useState(false);
   const estimate = calculateEstimatedPrice(formData);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSending(true);
+    try {
+      await sendQuoteToEmail(formData);
+    } catch (err) {
+      console.error('Email send error:', err);
+    } finally {
+      setIsSending(false);
+      setSubmitted(true);
+    }
+  };
+
+  const handleCopy = () => {
+    const text = formatQuoteDetailsText(formData);
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleDownload = () => {
+    const text = formatQuoteDetailsText(formData);
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `RSBC_Quote_Request_${formData.fullName.replace(/\s+/g, '_') || 'Customer'}.txt`;
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -123,34 +160,72 @@ export const ContactPage: React.FC = () => {
               <div>
                 <h3 className="text-xl font-bold text-white">Quotation Request Dispatched!</h3>
                 <p className="text-xs text-slate-300 mt-2 max-w-md mx-auto">
-                  Thank you, <strong className="text-white">{formData.fullName}</strong>. Your request for <span className="text-[#C9A84C] font-semibold">{formData.serviceType}</span> has been logged with Portfolio Management.
+                  Thank you, <strong className="text-white">{formData.fullName}</strong>. A full copy of all your requirements has been routed directly to <strong className="text-[#C9A84C] font-mono">{COMPANY_DETAILS.email}</strong>.
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-left space-y-2">
-                <div className="flex justify-between text-xs">
+              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-left space-y-3">
+                <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-800/80">
+                  <span className="text-slate-400">Recipient Operations Email:</span>
+                  <span className="text-white font-mono font-semibold flex items-center gap-1.5">
+                    <Mail className="w-3.5 h-3.5 text-[#C9A84C]" />
+                    {COMPANY_DETAILS.email}
+                  </span>
+                </div>
+
+                <div className="flex justify-between text-xs pb-2 border-b border-slate-800/80">
                   <span className="text-slate-400">Market Price Benchmark:</span>
                   <span className="text-[#C9A84C] font-mono font-bold">
                     R {estimate.minPrice.toLocaleString()} – R {estimate.maxPrice.toLocaleString()} {estimate.currency}
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-400">
-                  Prefer an immediate answer? Send these specifications directly to our director on WhatsApp:
-                </p>
-                <a
-                  href={generateWhatsAppQuoteLink(formData)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs transition-colors"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>Send via WhatsApp (+27 62 101 3195)</span>
-                </a>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                  <a
+                    href={generateEmailQuoteLink(formData)}
+                    className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-blue-600/30 hover:bg-blue-600/50 border border-blue-500/40 text-blue-200 text-xs font-semibold transition-colors"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                    <span>Open in Email App</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors cursor-pointer"
+                  >
+                    <Copy className="w-3.5 h-3.5 text-[#C9A84C]" />
+                    <span>{copied ? 'Copied to Clipboard!' : 'Copy Full Specs'}</span>
+                  </button>
+                </div>
+
+                <div className="pt-1">
+                  <button
+                    type="button"
+                    onClick={handleDownload}
+                    className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5 text-slate-400" />
+                    <span>Download Quote Spec Sheet (.txt)</span>
+                  </button>
+                </div>
+
+                <div className="pt-2 border-t border-slate-800">
+                  <a
+                    href={generateWhatsAppQuoteLink(formData)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs transition-colors"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Also Send to WhatsApp (+27 62 101 3195)</span>
+                  </a>
+                </div>
               </div>
 
               <button
                 onClick={() => setSubmitted(false)}
-                className="px-6 py-2 rounded-lg bg-slate-800 text-slate-200 text-xs font-semibold hover:bg-slate-700 transition-colors"
+                className="px-6 py-2 rounded-lg bg-slate-800 text-slate-200 text-xs font-semibold hover:bg-slate-700 transition-colors cursor-pointer"
               >
                 Submit Another Request
               </button>
@@ -356,6 +431,40 @@ export const ContactPage: React.FC = () => {
                   referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
+            </div>
+          </div>
+
+          {/* Maintain Pro Subscription Portal Card */}
+          <div className="bg-gradient-to-br from-slate-900 via-cyan-950/30 to-slate-900 border border-cyan-500/40 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/80 border border-cyan-800/60 px-2 py-0.5 rounded">
+                Cloud Maintenance Portal
+              </span>
+              <Sparkles className="w-4 h-4 text-cyan-400" />
+            </div>
+
+            <div>
+              <h4 className="text-base font-bold text-white font-display">
+                Maintain Pro Subscription Portal
+              </h4>
+              <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                Need continuous recurring maintenance, SLA job-ticket logging, and automated technician dispatch?
+              </p>
+            </div>
+
+            <div className="pt-1">
+              <a
+                href={COMPANY_DETAILS.maintenancePortalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-300 hover:to-cyan-400 text-slate-950 font-bold text-xs transition-transform hover:-translate-y-0.5 shadow-md"
+              >
+                <span>Subscribe on Maintain Pro</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+              <span className="text-[10px] text-slate-400 block text-center mt-1.5 font-mono">
+                maintain-pro-3f6d5ec8.base44.app
+              </span>
             </div>
           </div>
 

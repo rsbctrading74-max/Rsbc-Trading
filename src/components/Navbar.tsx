@@ -68,12 +68,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           }}
           className="flex items-center gap-3 text-left group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] rounded-lg p-1"
         >
-          <img
-            src="/src/assets/images/rsbc_logo_crest_1791449111579.jpg"
-            alt="RSBC Trading Logo Crest"
-            className="w-10 h-10 rounded-full object-cover border border-[#C9A84C]/50 shadow-sm transition-transform group-hover:scale-105"
-            referrerPolicy="no-referrer"
-          />
+          <div className="w-12 h-12 rounded-xl p-0.5 bg-slate-900 border border-[#C9A84C]/50 shadow-md flex items-center justify-center shrink-0 group-hover:border-[#C9A84C] transition-all">
+            <img
+              src="/src/assets/images/rsbc_logo_crest_1791449111579.jpg"
+              alt="RSBC Trading Official Insignia"
+              className="w-full h-full object-cover rounded-lg"
+              referrerPolicy="no-referrer"
+            />
+          </div>
           <div>
             <span className="text-xl font-bold tracking-tight text-white block leading-none font-display">
               RSBC <span className="text-[#C9A84C]">Trading</span>

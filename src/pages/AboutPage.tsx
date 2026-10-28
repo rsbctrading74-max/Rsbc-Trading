@@ -150,19 +150,28 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 className="bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition-colors shadow-lg"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-semibold text-[#C9A84C] bg-slate-900 px-2.5 py-1 rounded">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      {partner.logo && (
+                        <div className="w-12 h-12 rounded-xl overflow-hidden border border-slate-700 bg-slate-900 shadow-md shrink-0">
+                          <img
+                            src={partner.logo}
+                            alt={partner.name}
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                      )}
+                      <div>
+                        <h3 className="text-lg font-bold text-white font-display leading-tight">{partner.name}</h3>
+                        <p className="text-xs text-[#C9A84C] font-medium mt-0.5">{partner.focus}</p>
+                      </div>
+                    </div>
+                    <span className="text-xs font-semibold text-[#C9A84C] bg-slate-900 border border-slate-800 px-2.5 py-1 rounded shrink-0">
                       {partner.badge}
                     </span>
-                    {partner.name.includes('Future') ? (
-                      <Cpu className="w-5 h-5 text-blue-400" />
-                    ) : (
-                      <TrendingUp className="w-5 h-5 text-amber-400" />
-                    )}
                   </div>
-                  <h3 className="text-lg font-bold text-white font-display">{partner.name}</h3>
-                  <p className="text-xs text-[#C9A84C] font-medium mt-0.5">{partner.focus}</p>
-                  <p className="text-xs text-slate-300 mt-3 leading-relaxed">
+                  <p className="text-xs text-slate-300 leading-relaxed">
                     {partner.description}
                   </p>
                 </div>

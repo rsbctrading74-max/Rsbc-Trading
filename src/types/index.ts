@@ -62,4 +62,6 @@ export interface PartnerInfo {
   focus: string;
   description: string;
   badge: string;
+  logo?: string;
+  website?: string;
 }
